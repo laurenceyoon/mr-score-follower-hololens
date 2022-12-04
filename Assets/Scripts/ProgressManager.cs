@@ -7,7 +7,10 @@ using TMPro;
 public class ProgressManager : MonoBehaviour
 {
     public float progress = 0f;
-    private float threshold = 80f;
+    private List<float> thresholds = new List<float> { 
+        0f, 80f
+    };
+    private int currentIndex = 0;
 
     [SerializeField]
     public GameObject progressUI;
@@ -16,7 +19,6 @@ public class ProgressManager : MonoBehaviour
     public void updateProgress(float value)
     {
         progress = value;
-        Debug.Log(progress);
         progressUI.GetComponent<TextMeshPro>().SetText("Progress : " + progress.ToString());
 
         setScore();
@@ -24,20 +26,32 @@ public class ProgressManager : MonoBehaviour
     public void addProgress(float value)
     {
         progress += value;
-        Debug.Log(progress);
         progressUI.GetComponent<TextMeshPro>().SetText("Progress : " + progress.ToString());
     }
 
     void setScore()
     {
-        //Debug.Log(index.ToString() + progress.ToString());
-        if (progress > threshold)
+        for (int i = 0; i < thresholds.Count; i++)
         {
-            //scoreList[1].SetActive(true);
+            float threshold = thresholds[i];
+            if (progress > threshold && currentIndex != i)
+            {
+                Debug.Log($"progress({progress}) > threshold({threshold})");
+                currentIndex = i;
+                Debug.Log($"currentIndex updated!: {currentIndex}");
+                updateImages();
+            }
         }
-        else
-        {
-            //scoreList[1].SetActive(false);
-        }
+    }
+
+    public void resetScore()
+    {
+        currentIndex = 0;
+
+    }
+
+    void updateImages()
+    {
+        GameObject.Find("ScoreManager").GetComponent<ScoreManager>().displayScores(currentIndex);
     }
 }

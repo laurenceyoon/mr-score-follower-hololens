@@ -19,27 +19,15 @@ public class ScoreManager : MonoBehaviour
     //public Material myMaterial;
     public List<Renderer> renderers = new List<Renderer>();
     public ScoresList scoresList = new ScoresList();
-    public int index;
     // Start is called before the first frame update
-    private void Awake()
-    {
 
-    }
-    void Start()
+    public void displayScores(int index)
     {
-        foreach (Renderer renderer in renderers)
+        for (int i = 0; i < renderers.Count; i++)
         {
-            foreach (Scores scores in scoresList.scoresList)
-            {
-                Texture scoreImage = scores.scores[index];
-                renderer.material.mainTexture = scoreImage;
-            }
+            Renderer renderer = renderers[i];
+            Scores scores = scoresList.scoresList[i];
+            renderer.material.mainTexture = scores.scores[index];
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

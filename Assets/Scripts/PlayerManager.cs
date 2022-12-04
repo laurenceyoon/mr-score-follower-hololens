@@ -39,12 +39,12 @@ public class PlayerManager: MonoBehaviourPunCallbacks
     void UpdateProgressRPC(float value)
     {
         GameObject.Find("ProgressManager").GetComponent<ProgressManager>().updateProgress(value);
-        Debug.Log("UpdateProgressRPC");
+        Debug.Log($"progress in PlayerManager.UpdateProgressRPC(): {value}");
     }
     [PunRPC]
     void AddProgressRPC(float value)
     {
-        GameObject.Find("ProgressManager").GetComponent<ProgressManager>().addProgress(1f);
-        Debug.Log("AddProgressRPC");
+        GameObject.Find("ProgressManager").GetComponent<ProgressManager>().addProgress(value);
+        Debug.Log($"progress in PlayerManager.AddProgressRPC(): {value}");
     }
 }
