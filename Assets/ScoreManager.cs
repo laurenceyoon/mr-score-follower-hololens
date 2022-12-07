@@ -16,7 +16,6 @@ public class ScoresList
 public class ScoreManager : MonoBehaviour
 {
     //material texture change
-    //public Material myMaterial;
     public List<Renderer> renderers = new List<Renderer>();
     public ScoresList scoresList = new ScoresList();
     // Start is called before the first frame update
